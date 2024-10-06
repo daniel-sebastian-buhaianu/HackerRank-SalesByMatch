@@ -10,29 +10,29 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
-
-    /*
-     * Complete the 'sockMerchant' function below.
-     *
-     * The function is expected to return an INTEGER.
-     * The function accepts following parameters:
-     *  1. INTEGER n
-     *  2. INTEGER_ARRAY ar
-     */
-
-    public static int sockMerchant(int n, List<Integer> ar) {
-        int[] count = new int[101];
-        for (Integer color : ar) {
-            count[color]++;
+class Result
+{
+    public static int sockMerchant(int n, List<Integer> ar)
+    {
+        if (n == 0)
+        {
+            return 0;
         }
+        
+        HashMap<Integer, Integer> counter = new HashMap<>();
+        for (int sock : ar)
+        {
+            counter.put(sock, counter.getOrDefault(sock, 0) + 1);
+        }
+        
         int pairs = 0;
-        for (int color = 1; color <= 100; color++) {
-            pairs += count[color]/2;
+        for (int count : counter.values())
+        {
+            pairs += count / 2;
         }
+        
         return pairs;
     }
-
 }
 
 public class Solution {
